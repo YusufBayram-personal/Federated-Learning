@@ -1,0 +1,19 @@
+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
+
+huggingface-cli login
+
+python main_server.py --model_id "EleutherAI/pythia-410m"
+    --dataset_id wikitext --num_clients 10 --num_rounds 5
+    --strategy fedavg
+
+python mia.py --root_dataset ag_news 
+    --model YusufBayram-Personal/facebook-MobileLLM-125M_ag_news-round_1
+    --dataset_split dataset_32 --save_folder results_mia
+
+python main_server.py --model_id "EleutherAI/pythia-410m" 
+    --dataset_id wikitext, --num_clients 10 --num_rounds 20 
+    --strategy fedavg
+
+python mia.py --root_dataset YusufBayram-Personal/mia_wikitext_client1 --model YusufBayram-Personal/EleutherAI-pythia-70m_client1_round0 --dataset_split train --save_folder results_mia
+
+python main_server.py --model_id "EleutherAI/pythia-70m" --dataset_id wikitext --num_clients 10 --num_rounds 20 --strategy fedavg
