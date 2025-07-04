@@ -1,5 +1,6 @@
 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
 
+(use uv for workstation)
 pip install huggingface_hub
 pip install transformers
 pip install peft
@@ -8,9 +9,7 @@ pip install trl
 
 huggingface-cli login
 
-python main_server.py --model_id "EleutherAI/gpt-neo-125m"
-    --dataset_id ag_news --num_clients 10 --num_rounds 5
-    --strategy fedavg
+python main_server.py --model_id "EleutherAI/gpt-neo-125m" --dataset_id ag_news --num_clients 10 --num_rounds 5 --strategy fedavg
 
 python mia.py --root_dataset ag_news 
     --model YusufBayram-Personal/facebook-MobileLLM-125M_ag_news-round_1
@@ -26,3 +25,4 @@ python main_server.py --model_id "EleutherAI/pythia-70m" --dataset_id wikitext -
 
 
 ssh roya@172.21.133.195
+source .venv/bin/activate
