@@ -81,9 +81,9 @@ def aggregate_client_weights(round_id: int, num_clients: int, weights_dir: str, 
 
     print(f"[UPLOAD] Uploaded global model of round {round_id + 1} to Hugging Face at {full_repo_id}")
     # sadece alandan tasarruf etmek için global roundlar dışındaki tüm weightleri siler 
-    for path in paths:
-        if os.path.exists(path) and "client" in os.path.basename(path):
-            os.remove(path)
+#    for path in paths:
+#        if os.path.exists(path) and "client" in os.path.basename(path):
+#            os.remove(path)
 
        
 def run_federated_learning(model_id: str, dataset_id: str, num_rounds: int, num_clients: int, strategy):
