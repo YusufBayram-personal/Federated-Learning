@@ -22,7 +22,7 @@ def main():
 
     args = parser.parse_args()
 
-    repo_name = f"YusufBayram-Personal/{args.model_id.replace('/', '-')}_client{args.client_id}_round{args.round_id}"
+    repo_name = f"RoyArkh/Test1-{args.model_id.replace('/', '-')}_client{args.client_id}_round{args.round_id}"
 
     push_client_model(
         model_id=args.model_id,

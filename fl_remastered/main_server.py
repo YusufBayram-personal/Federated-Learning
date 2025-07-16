@@ -20,7 +20,7 @@ def initialize_global_model(model_id: str, weights_dir: str):
     print("Server initialized global model.")
 
     repo_name = f"{model_id.replace('/', '-')}_round_0"
-    namespace = "YusufBayram-Personal"
+    namespace = "RoyArkh"
     full_repo_id = f"{namespace}/{repo_name}"
     hf_model_dir = os.path.join("hf_upload", repo_name)
     os.makedirs(hf_model_dir, exist_ok=True)
@@ -67,7 +67,7 @@ def aggregate_client_weights(round_id: int, num_clients: int, weights_dir: str, 
     load_model_weights(model, save_path)
 
     repo_name = f"{model_id.replace('/', '-')}_{dataset_id}_round_{round_id + 1}"
-    namespace = "YusufBayram-Personal"
+    namespace = "RoyArkh"
     full_repo_id = f"{namespace}/{repo_name}"
     hf_model_dir = os.path.join("hf_upload", repo_name)
     os.makedirs(hf_model_dir, exist_ok=True)
@@ -81,9 +81,9 @@ def aggregate_client_weights(round_id: int, num_clients: int, weights_dir: str, 
 
     print(f"[UPLOAD] Uploaded global model of round {round_id + 1} to Hugging Face at {full_repo_id}")
     # sadece alandan tasarruf etmek için global roundlar dışındaki tüm weightleri siler 
-    for path in paths:
-        if os.path.exists(path) and "client" in os.path.basename(path):
-            os.remove(path)
+#    for path in paths:
+#        if os.path.exists(path) and "client" in os.path.basename(path):
+#            os.remove(path)
 
        
 def run_federated_learning(model_id: str, dataset_id: str, num_rounds: int, num_clients: int, strategy):
