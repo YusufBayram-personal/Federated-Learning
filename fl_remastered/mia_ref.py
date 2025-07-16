@@ -85,23 +85,19 @@ def load_ref_model(ref_model):
         
 
 def load_benchmark_dataset(dataset_name, dataset_split):
-    #hosein has prepared the latest versions, so I am pulling those in here
     try:
-        print(f"Loading benchmark dataset according to args.root_dataset: {dataset_name}")
-        if dataset_name == "wikitext":
-            dataset = load_dataset('mia-llm/wikitext2raw_benchmark_roya',split=dataset_split)
-            print('mia-llm/wikitext2raw_benchmark_roya')
-        elif dataset_name == "ag_news":
-            dataset = load_dataset('mia-llm/ag_news_benchmark_roya',split=dataset_split)
+        print(f"Loading dataset: {dataset_name}, split: {dataset_split}")
+        if dataset_name == "ag_news":
+            return load_dataset('mia-llm/ag_news_benchmark_roya', split=dataset_split)
         elif dataset_name == "xsum":
-            dataset = load_dataset('mia-llm/xsum_benchmark_roya', split=dataset_split)
+            return load_dataset('mia-llm/xsum_benchmark_roya', split=dataset_split)
+        elif dataset_name == "wikitext":
+            return load_dataset('mia-llm/wikitext2raw_benchmark_roya', split=dataset_split)
         else:
-            raise ValueError("wrong name!")
-            #or RoyArkh/new_wikitext2_benchmark - crates an error
-            #mia-llm/wikitext2-MIA-Benchmark
-        return dataset
+            print("Custom dataset detected — loading from Hugging Face Hub...")
+            return load_dataset(dataset_name, split=dataset_split)
     except Exception as e:
-        raise RuntimeError(f"Failed to load benchmark dataset: {e}")
+        raise RuntimeError(f"Failed to load dataset: {e}")
 
 
 
@@ -194,7 +190,7 @@ def make_file_and_save(scores, data, save_folder, attacked_model_name, ref_model
 def main():
     parser = argparse.ArgumentParser()
     #we will load benchmark based on this
-    parser.add_argument('--root_dataset', type=str, choices=['ag_news', 'xsum', 'wikitext'])
+    parser.add_argument('--root_dataset', type=str)
     #fine-tuned models for attacking
     parser.add_argument('--model', type=str)
     #split used for the dataset
